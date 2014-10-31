@@ -119,6 +119,9 @@ angular.module('hackproApp')
             }
 
             $scope.post.builtWith += " ";
+            if (skills.length > 0) {
+                $scope.post.builtWith += "using ";
+            }
 
             for(var i = 0; i < skills.length; i++) {
                 if (i>0) {
