@@ -18,7 +18,7 @@ angular.module('hackproApp')
     // **use https://hackpro.firebaseio.com/*hackname to access data for a specific hack
     // **have all hacks in one big https://hackpro.firebaseio.com with their names as their ids
     // **maybe use /software/overboard same url ending as firebase
-    var ref = new Firebase("https://hackpro.firebaseio.com/overboard");
+    var ref = new Firebase("https://hackpro.firebaseio.com/overboard/color-reno");
     var sync = $firebase(ref);
     //sync.$set({Overboard: "bar"});
     var hack = sync.$asObject();
