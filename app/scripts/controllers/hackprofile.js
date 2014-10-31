@@ -39,7 +39,7 @@ angular.module('hackproApp')
 
     //**ADD IN SPECIAL CASES LIKE AWARDS & DATES -- look out for special cases not accounted for**//
     //look for date in hackathon object?
-    $scope.blogPost = function(title, images, tagline, description, hackers, competition, skills, builtWith, platforms, callback) {
+    $scope.blogPost = function(title, images, tagline, description, hackers, competition, skills, platforms, callback) {
         //title 
         $scope.post.title = title;
         //pictures 
@@ -47,13 +47,9 @@ angular.module('hackproApp')
         //tagline
         $scope.post.tagline = tagline;
         //intro - Peter Klipfel, Christopher Baker, and Kaijah Hougham built Color Reno and won best in show at Hack4Reno 2014.
-        $scope.generateIntro(hackers, competition, function(intro) {
-            $scope.post.intro = intro;
-        });
+        $scope.generateIntro(hackers, competition, title);
         //builtWith - They built it for Web using css, javascript, python, ruby, and shell.
-        $scope.generateBuiltWith(skills, platforms, function(builtWith) {
-            $scope.posts.builtWith = builtWith;
-        })
+        $scope.generateBuiltWith(skills, platforms)
         //whatTheySaid - ...
         $scope.post.whatTheySaidIntro = "Here’s what they had to say about Color Reno:"
         $scope.post.whatTheySaid = description;
@@ -65,18 +61,84 @@ angular.module('hackproApp')
                 $scope.post.profiles.push(profile);            
             })
         };
-        return $scope.post;
+        //return $scope.post;
     }
 
-    $scope.generateIntro = function(hackers, competition, callback) {
-        return "intro";
+    $scope.generateIntro = function(hackers, competition, title) {
+        $scope.post.intro = "";
+        //names
+        for(var i = 0; i < hackers.length; i++) {
+            if (i>0) {
+                if (i === hackers.length-1) {
+                    $scope.post.intro += " and";
+                }
+                else if (i < hackers.length-1) {
+                    $scope.post.intro += ",";
+                }
+                $scope.post.intro += " ";
+            }
+            $scope.post.intro += hackers[i].username;
+        }
+
+        $scope.post.intro += " built ";
+        $scope.post.intro += title + " ";
+        if (competition) {
+            $scope.post.intro += "at the " + competition + ".";          
+        }
+        return "intro2";
     }
+    /*SERIES FUNCTION SO WE ARENT REDUNDANTLY WRITING CODE
+    $scope.series = function(series, attr) {
+        $scope.seriesCopy = "";
+        for(var i = 0; i < series.length; i++) {
+            //**need to use AND
+            console.log($scope.post.intro);
+            if (i>0) {
+                if (i === hackers.length-1) {
+                    $scope.post.intro += " and";
+                }
+                else if (i < hackers.length-1) {
+                    $scope.post.intro += ",";
+                }
+                $scope.post.intro += " ";
+            }
+            $scope.post.intro += hackers[i][attr];
+        }
+    }
+    */
+    
 
     $scope.generateBuiltWith = function(skills, platforms, callback) {
-        return "skills/platforms"
+        $scope.post.builtWith = "";
+        if (skills.length != 0 || platforms.length != 0) {
+            $scope.post.builtWith += "They built it for ";  
+
+            for(var i=0; i<platforms.length; i++) {
+                if (i>0) {$scope.post.builtWith += "/"}
+                $scope.post.builtWith += platforms[i];
+            }
+
+            $scope.post.builtWith += " ";
+
+            for(var i = 0; i < skills.length; i++) {
+                if (i>0) {
+                    if (i === skills.length-1) {
+                        $scope.post.builtWith += " and";
+                    }
+                    else if (i < skills.length-1) {
+                        $scope.post.builtWith += ",";
+                    }
+                    $scope.post.builtWith += " ";
+                }
+                $scope.post.builtWith += skills[i];
+            }
+            $scope.post.builtWith += ".";
+        }
     }
+
     $scope.generateProfile = function(hacker, callback) {
-        return "Hacker Profile"
+        //$scope.post.profiles.push(hacker.username);
+        return hacker.username
     }
     $scope.printPost = function() {
         console.log($scope.post);

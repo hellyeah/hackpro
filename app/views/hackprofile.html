@@ -1,4 +1,13 @@
 <p ng-click="printPost()">This is the hackprofile view.</p>
 <h3>{{post.title}}</h3>
+<img src="{{post.images[0]}}">
+<h1>{{post.tagline}}</h1>
+<p>{{post.intro}}</p>
+<p>{{post.builtWith}}</p>
+<p>{{post.whatTheySaidIntro}}</p>
+<p>{{post.whatTheySaid}}</p>
+<p ng-repeat="profile in post.profiles">{{profile}}</p>
+
+
 
 
