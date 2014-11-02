@@ -1,0 +1,98 @@
+{
+  "overboard": {
+    "_id": "544ea69c96d6f73fb95fc4b5",
+    "viewCount": "171",
+    "users": [
+      {
+        "avatarUrl": "http://www.gravatar.com/avatar/4ef7e76a58d38ca255a9af40bc8d5064?d=http%3A%2F%2Fchallengepost1.assetspost.com%2Fassets%2Fhome%2Flayout%2Fno-avatar-180.png&s=180",
+        "location": "Scottsdale, Arizona, United States",
+        "username": "jordansinger"
+      },
+      {
+        "avatarUrl": "http://s3.amazonaws.com/challengepost/photos/production/user_photos/000/178/790/datas/profile.jpeg?1414353643",
+        "location": "Chicago, Illinois, United States",
+        "username": "austinjv"
+      }
+    ],
+    "builtWith": [
+      "cocoapods",
+      "css",
+      "html",
+      "ios",
+      "objective-c",
+      "ruby-on-rails"
+    ],
+    "pictures": [
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/178/854/datas/xlarge.png?1414353775",
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/178/855/datas/xlarge.png?1414353776",
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/178/856/datas/xlarge.png?1414353776",
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/178/857/datas/xlarge.png?1414353777"
+    ],
+    "title": "Overboard",
+    "winners": [],
+    "competition": "Product Hunt Hackathon",
+    "likeCount": "8",
+    "websiteUrl": "http://overboard.me/",
+    "platforms": [
+      "iOS",
+      "Web"
+    ],
+    "appDetails": "API's contain incredibly valuable information. Often times they provide a number that gives an overview of some statistic, for example number of users or a stock price. With Overboard, you can gather all of these endpoints into one simple overview and dashboard. Check your Twitter followers at a glance, see what the top product on Product Hunt is for the day, get a stock price, check the number of users for your startup, the possibilities are endless. If you have an API for it, you can Overboard it.\n\nWe built Overboard because there are so many different things we keep track of on a daily basis, and they are all in separate places. Combining these all into one convenient overview was a natural fit.\n\nWe provide you with a great set of cards built in so that you can track many popular social network follower counts, get a stock price or see what the weather is. Have a custom API endpoint you want to keep track of? Just give it a title, enter the endpoint URL, give us the object in the array that the info is located, and provide some parameters if need be.\n\n\n\n    \n\n    \n\n        \n    \n      Try it out\n      \n    \n\n    \n      \n  \n  overboard.me\n\n      \n    \n  \n\n        \n    \n      Submitted to\n      \n    \n\n    \n      \n  \n    \n  \n\n  \n    \n      Product Hunt Hackathon\n    \n\n\n  \n\n\n    \n  \n\n          \n      \n        Platforms\n        \n      \n\n      \n        iOS\nWeb\n\n      \n    \n\n      \n    \n      \n        Built With\n        \n      \n\n      \n        cocoapods\ncss\nhtml\nios\nobjective-c\nruby-on-rails",
+    "link": "http://challengepost.com/software/overboard",
+    "dataSoftwareId": "20500",
+    "competitionUrl": "http://producthunthackathon.challengepost.com/",
+    "tagline": "An overview of the things you want to keep track of.",
+    "commentCount": "5",
+    "name": "overboard"
+  },
+  "color-reno":  {
+    "_id": "544ea6be96d6f73fb95fc4cf",
+    "viewCount": "30",
+    "users": [
+      {
+        "avatarUrl": "http://www.gravatar.com/avatar/e8de73afca9cb11097df2fda0943c0df?d=http%3A%2F%2Fchallengepost1.assetspost.com%2Fassets%2Fhome%2Flayout%2Fno-avatar-180.png&s=180",
+        "location": "Longmont, Colorado, United States",
+        "username": "peterklipfel"
+      },
+      {
+        "avatarUrl": "http://www.gravatar.com/avatar/86e2beaf7f5b0d1b81ae07b11b691999?d=http%3A%2F%2Fchallengepost1.assetspost.com%2Fassets%2Fhome%2Flayout%2Fno-avatar-180.png&s=180",
+        "location": "Reno, Nevada, United States",
+        "username": "slithytove2"
+      },
+      {
+        "avatarUrl": "http://www.gravatar.com/avatar/e316c4e2c50a3a3ddd648651908f0ccd?d=http%3A%2F%2Fchallengepost1.assetspost.com%2Fassets%2Fhome%2Flayout%2Fno-avatar-180.png&s=180",
+        "location": "Reno, Nevada, United States",
+        "username": "Seberius"
+      }
+    ],
+    "builtWith": [
+      "css",
+      "javascript",
+      "python",
+      "ruby",
+      "shell"
+    ],
+    "pictures": [
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/179/185/datas/xlarge.png?1414362696",
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/179/186/datas/xlarge.png?1414362697",
+      "http://s3.amazonaws.com/challengepost/photos/production/software_photos/000/179/187/datas/xlarge.png?1414362698"
+    ],
+    "title": "Color Reno",
+    "winners": [
+      "Winner\n            Best in Show"
+    ],
+    "competition": "Hack4Reno 2014",
+    "likeCount": "1",
+    "websiteUrl": "http://colorreno.com/",
+    "platforms": [
+      "Web"
+    ],
+    "appDetails": "Color Reno\n\nVisualizes color pallettes from images in the Reno area.\n\nThe project used Apache spark to comb through 100M creative commons images and find images that were geotagged in and around Reno. These images were then processed with three different color palette finding tools. Imagemagick, colorific, and a custom implementation were used to find color palettes. They produce surprisingly different results.\n\nThe primary data visualization was implemented as a canvas layer on top of leaflet.js. The image explorer was implemented with cartoDB.\n\n\n\n    \n\n    \n\n        \n    \n      Try it out\n      \n    \n\n    \n      \n  \n  colorreno.com\n\n      \n    \n  \n\n        \n    \n      Submitted to\n      \n    \n\n    \n      \n  \n    \n  \n\n  \n    \n      Hack4Reno 2014\n    \n\n      \n          \n            Winner\n            Best in Show\n          \n      \n\n  \n\n\n    \n  \n\n          \n      \n        Platforms\n        \n      \n\n      \n        Web\n\n      \n    \n\n      \n    \n      \n        Built With\n        \n      \n\n      \n        css\njavascript\npython\nruby\nshell",
+    "link": "http://challengepost.com/software/color-reno",
+    "dataSoftwareId": "20587",
+    "competitionUrl": "http://hack4reno.challengepost.com/",
+    "tagline": "Visualizing the colors of Reno",
+    "commentCount": "0",
+    "name": "color-reno"
+  }
+}

@@ -28,7 +28,7 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/hackprofile', {
+      .when('/hackprofile/:hack', {
         templateUrl: 'views/hackprofile.html',
         controller: 'HackprofileCtrl'
       })

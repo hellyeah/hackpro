@@ -8,7 +8,7 @@
  * Controller of the hackproApp
  */
 angular.module('hackproApp')
-  .controller('HackprofileCtrl', function ($scope, $timeout, $firebase) {
+  .controller('HackprofileCtrl', function ($scope, $timeout, $routeParams, $firebase) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -18,13 +18,13 @@ angular.module('hackproApp')
     // **use https://hackpro.firebaseio.com/*hackname to access data for a specific hack
     // **have all hacks in one big https://hackpro.firebaseio.com with their names as their ids
     // **maybe use /software/overboard same url ending as firebase
-    var ref = new Firebase("https://hackpro.firebaseio.com/overboard/color-reno");
+    var firebaseURL = "https://hackpro.firebaseio.com/" + $routeParams.hack;
+    var ref = new Firebase(firebaseURL);
     var sync = $firebase(ref);
     //sync.$set({Overboard: "bar"});
     var hack = sync.$asObject();
     hack.$loaded().then(function() {
-        $scope.hack = hack;
-        console.log('start generating post');    
+        $scope.hack = hack;  
         $scope.post = {};
 
         //MAGIC//
