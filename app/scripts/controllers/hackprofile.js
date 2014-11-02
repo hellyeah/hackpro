@@ -8,7 +8,7 @@
  * Controller of the hackproApp
  */
 angular.module('hackproApp')
-  .controller('HackprofileCtrl', function ($scope, $firebase) {
+  .controller('HackprofileCtrl', function ($scope, $timeout, $firebase) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -23,17 +23,25 @@ angular.module('hackproApp')
     //sync.$set({Overboard: "bar"});
     var hack = sync.$asObject();
     hack.$loaded().then(function() {
-        $scope.generatePost(hack);
+        $scope.hack = hack;
+        console.log('start generating post');    
+        $scope.post = {};
+
+        //MAGIC//
+        $scope.generatePost(hack, function(post) {
+            console.log(post);
+        });
+        //after DOM is rendered, make links work immediately
+        $timeout($scope.makeLinksWork, 0);
     })
-    $scope.hack = hack;
-    console.log($scope.hack);
-    $scope.post = {};
+
 
     //CRAZY SHIT
-    $scope.generatePost = function (hack) {
-        console.log(hack);
+    $scope.generatePost = function (hack, callback) {
+        //console.log(hack);
         $scope.blogPost(hack.title, hack.pictures, hack.tagline, hack.appDetails, hack.users, hack.competition, hack.builtWith, hack.platforms, function(post) {
-            console.log(post);
+            callback(post);
+            //$scope.makeLinksWork();
         });
     }
 
@@ -47,45 +55,55 @@ angular.module('hackproApp')
         //tagline
         $scope.post.tagline = tagline;
         //intro - Peter Klipfel, Christopher Baker, and Kaijah Hougham built Color Reno and won best in show at Hack4Reno 2014.
-        $scope.generateIntro(hackers, competition, title);
+        $scope.generateIntro(hackers, competition, title, function(intro) {
+            //console.log('generated intro');
+            $scope.post.intro = intro;
+            console.log('intro generated');
+            //$scope.makeLinksWork();
+        });
         //builtWith - They built it for Web using css, javascript, python, ruby, and shell.
-        $scope.generateBuiltWith(skills, platforms)
+        $scope.generateBuiltWith(skills, platforms, function(builtWith) {
+            $scope.post.builtWith = builtWith;
+            console.log('builtWith generated')
+        });
         //whatTheySaid - ...
         $scope.post.whatTheySaidIntro = "Here’s what they had to say about Color Reno:"
         $scope.post.whatTheySaid = description;
         //individualProfiles - Peter is a full-stack developer from Longmonth, Colorado. You can check out his website here: http://peterklipfel.com/
         //will need to run a look
-        $scope.post.profiles = [];
-        for (var i=0; i < hackers.length; i++) {
-            $scope.generateProfile(hackers[i], function(profile) {
-                $scope.post.profiles.push(profile);            
-            })
-        };
-        //return $scope.post;
+        $scope.generateProfiles(hackers, function(profiles) {
+            $scope.post.profiles = profiles;
+            console.log('profiles generated')
+        })
+        //$scope.post.profiles = [];
+        callback($scope.post);
     }
 
-    $scope.generateIntro = function(hackers, competition, title) {
-        $scope.post.intro = "";
+    $scope.generateIntro = function(hackers, competition, title, callback) {
+        //console.log('start generating intro');
+        var intro = "";
         //names
         for(var i = 0; i < hackers.length; i++) {
             if (i>0) {
                 if (i === hackers.length-1) {
-                    $scope.post.intro += " and";
+                    intro += " and";
                 }
                 else if (i < hackers.length-1) {
-                    $scope.post.intro += ",";
+                    intro += ",";
                 }
-                $scope.post.intro += " ";
+                intro += " ";
             }
-            $scope.post.intro += hackers[i].username;
+            //$scope.post.intro += hackers[i].username;
+            //$scope.post.intro += $scope.insertLink(hackers[i].username, "http://github.com/hellyeah");
+            intro += hackers[i].username.link("http://github.com/hellyeah");
+            //$scope.makeLinksWork();
         }
-
-        $scope.post.intro += " built ";
-        $scope.post.intro += title + " ";
+        intro += " built ";
+        intro += title + " ";
         if (competition) {
-            $scope.post.intro += "at the " + competition + ".";          
+            intro += "at the " + competition + ".";          
         }
-        return "intro2";
+        callback(intro);
     }
     /*SERIES FUNCTION SO WE ARENT REDUNDANTLY WRITING CODE
     $scope.series = function(series, attr) {
@@ -107,48 +125,78 @@ angular.module('hackproApp')
     }
     */
     
-
     $scope.generateBuiltWith = function(skills, platforms, callback) {
-        $scope.post.builtWith = "";
+        var builtWith = "";
         if (skills.length != 0 || platforms.length != 0) {
-            $scope.post.builtWith += "They built it for ";  
+            builtWith += "They built it for ";  
 
             for(var i=0; i<platforms.length; i++) {
-                if (i>0) {$scope.post.builtWith += "/"}
-                $scope.post.builtWith += platforms[i];
+                if (i>0) {builtWith += "/"}
+                builtWith += platforms[i];
             }
 
-            $scope.post.builtWith += " ";
+            builtWith += " ";
             if (skills.length > 0) {
-                $scope.post.builtWith += "using ";
+                builtWith += "using ";
             }
 
             for(var i = 0; i < skills.length; i++) {
                 if (i>0) {
                     if (i === skills.length-1) {
-                        $scope.post.builtWith += " and";
+                        builtWith += " and";
                     }
                     else if (i < skills.length-1) {
-                        $scope.post.builtWith += ",";
+                        builtWith += ",";
                     }
-                    $scope.post.builtWith += " ";
+                    builtWith += " ";
                 }
-                $scope.post.builtWith += skills[i];
+                builtWith += skills[i];
+                //$scope.makeLinksWork();
             }
-            $scope.post.builtWith += ".";
+            builtWith += ".";
         }
+        callback(builtWith);
+    }
+
+    $scope.generateProfiles = function(hackers, callback) {
+        var profiles = [];
+        for (var i=0; i < hackers.length; i++) {
+            $scope.generateProfile(hackers[i], function(profile) {
+                //console.log('profile');
+                profiles.push(profile);
+            })
+        };
+        callback(profiles)
     }
 
     $scope.generateProfile = function(hacker, callback) {
-        //$scope.post.profiles.push(hacker.username);
-        return hacker.username
+        callback(hacker.username);
     }
     $scope.printPost = function() {
         console.log($scope.post);
     }
 
+    //pass in a string and the url you want it to link to
+    //to call, find matches for a certain string and replace those matches with this
+    //str.replace(string, insertLink(string, url));
+    // $scope.insertLink = function(string, url) {
+    //     return '<a href="' + url + '">' + string + '</a>';
+    // }
+
+    $scope.makeLinksWork = function() {
+        console.log('make links work');
+        console.log($scope.post);
+        var ps = document.getElementsByTagName('p');
+        console.log('ps:');
+        console.log(ps);
+        for(var i =0; i < ps.length; i++) { 
+            ps[i].innerHTML = ps[i].textContent;
+        }
+    }
+
 
   });
+
 
 
 
