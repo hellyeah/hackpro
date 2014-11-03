@@ -32,6 +32,10 @@ angular
         templateUrl: 'views/hackprofile.html',
         controller: 'HackprofileCtrl'
       })
+      .when('/addHack', {
+        templateUrl: 'views/addhack.html',
+        controller: 'AddhackCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
